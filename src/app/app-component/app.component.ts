@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ScoreService } from './score.service';
+import { ScoreService } from '../services/score.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({

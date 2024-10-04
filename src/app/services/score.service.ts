@@ -2,7 +2,7 @@ import { startWith, Subject } from "rxjs";
 import { GameScore } from "../entities/game-score";
 
 export class ScoreService {
-    private API = 'http://localhost:3000/games';
+    private API = 'http://localhost:3000/games/canal-unico';
     private sseSource: EventSource | null = null;
     private scoreSubject$ = new Subject<GameScore>();
     public scores$ = this.scoreSubject$.asObservable().pipe(

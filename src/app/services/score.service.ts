@@ -1,24 +1,24 @@
 import { startWith, Subject } from "rxjs";
-import { GameScore } from "../entities/game-score";
+import { HealthyScore } from "../entities/healthy-score";
 
 export class ScoreService {
-    private API = 'http://localhost:3000/games/canal-unico';
+    private API = 'http://localhost:3000/healthy/single-channel';
     private sseSource: EventSource | null = null;
-    private scoreSubject$ = new Subject<GameScore>();
+    private scoreSubject$ = new Subject<HealthyScore>();
     public scores$ = this.scoreSubject$.asObservable().pipe(
       startWith({
-        lakers: 0,
-        denver: 0,
+        steps: 0,
+        calories: 0,
       })
     );
 
     private getFeed(): void {
-        this.sseSource = new EventSource(`${this.API}/scores-subscribe`);
+        this.sseSource = new EventSource(`${this.API}/subscription-scores`);
         
         this.sseSource.addEventListener('message', (e: MessageEvent) => {
-          const { game } = JSON.parse(e.data);
+          const { training } = JSON.parse(e.data);
     
-          this.scoreSubject$.next(game);
+          this.scoreSubject$.next(training);
         });
     
         this.sseSource.onerror = () => {
@@ -33,7 +33,7 @@ export class ScoreService {
         if (this.sseSource) {
             this.sseSource.close();
             this.sseSource = null;
-            console.log("Conexión SSE cerrada");
+            console.log("SSE connection closed");
         }
       }
     

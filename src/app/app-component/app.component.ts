@@ -12,7 +12,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class AppComponent {
   private scoreService = inject(ScoreService);
-  public gameScore$ = this.scoreService.scores$;
+  public healthyScore$ = this.scoreService.scores$;
 
   public stop(): void {
     this.scoreService.stop();
